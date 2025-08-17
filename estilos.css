@@ -1,19 +1,19 @@
-/* Usamos variables CSS para manejar fácilmente la paleta de colores rosa pastel */
+/* Usamos variables CSS para una paleta de colores rosa más viva y llamativa */
 :root {
-    --color-fondo: #FFF0F5; /* Rosa muy pálido para el fondo */
+    --color-fondo: #fff0f5; /* Mantenemos un fondo pastel suave para no cansar la vista */
     --color-texto: #5c3b4d; /* Un tono oscuro para buena legibilidad */
-    --color-borde: #ffc2d1;
+    --color-borde: #f78fb3;
     
-    /* Colores para cada ámbito de ramo */
-    --color-general: #ffe5ec;
-    --color-disciplinario: #ffc2d1;
-    --color-practico: #ffb3c6;
-    --color-profesional: #fb6f92; /* Un rosa más llamativo como pediste */
+    /* Colores más vibrantes para cada ámbito de ramo */
+    --color-general: #ffc0cb;       /* Rosa clásico */
+    --color-disciplinario: #ff80ab; /* Rosa más intenso */
+    --color-practico: #f78fb3;      /* Rosa medio */
+    --color-profesional: #e54f6d;   /* Un rosa rojizo, muy llamativo */
 
     /* Colores para los estados */
-    --color-aprobado: #e0e0e0; /* Un gris suave para ramos aprobados */
-    --color-aprobado-texto: #888;
-    --color-bloqueado: #f8f0f2; /* Un rosa muy desaturado */
+    --color-aprobado: #d81b60; /* Un rosa MAGENTA muy vivo para ramos aprobados */
+    --color-aprobado-texto: #ffffff; /* Texto blanco para resaltar sobre el fondo vivo */
+    --color-bloqueado: #fdeaf1;      /* Un rosa muy pálido para ramos bloqueados */
     --color-bloqueado-texto: #b4a6aa;
 }
 
@@ -32,7 +32,7 @@ header {
 }
 
 h1 {
-    color: var(--color-profesional);
+    color: var(--color-profesional); /* Título con el color más llamativo */
     font-weight: 600;
 }
 
@@ -44,7 +44,6 @@ h1 {
 /* Contenedor principal de la malla usando CSS Grid para ser responsivo */
 .malla-grid {
     display: grid;
-    /* Crea 10 columnas, pero se ajustarán automáticamente en pantallas pequeñas */
     grid-template-columns: repeat(10, 1fr);
     gap: 15px;
     max-width: 1600px;
@@ -78,12 +77,13 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
+    font-weight: 400; /* Un poco más de peso en la fuente */
 }
 
 /* Efecto al pasar el mouse sobre un ramo */
 .ramo:not(.bloqueado):not(.aprobado):hover {
     transform: translateY(-3px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(199, 92, 127, 0.2);
 }
 
 /* Clases de colores según el ámbito del ramo */
@@ -92,13 +92,16 @@ h1 {
 .ambito-practico { background-color: var(--color-practico); }
 .ambito-profesional { background-color: var(--color-profesional); color: white; }
 
-/* Estilo para los ramos aprobados */
+/* Estilo para los ramos aprobados: ¡AHORA MÁS VIVO! */
 .ramo.aprobado {
     background-color: var(--color-aprobado);
     color: var(--color-aprobado-texto);
     text-decoration: line-through;
-    border-color: #ccc;
+    text-decoration-thickness: 2px; /* Línea de tachado más gruesa */
+    border-color: #b81752;
     cursor: default;
+    opacity: 0.9; /* Una leve opacidad para integrarlo */
+    transform: scale(1.02); /* Un leve zoom para que resalte */
 }
 
 /* Estilo para los ramos bloqueados */
@@ -180,17 +183,17 @@ h1 {
 /* Media Query para hacer la malla responsiva en celulares */
 @media (max-width: 1200px) {
     .malla-grid {
-        grid-template-columns: repeat(5, 1fr); /* 5 columnas en tablets */
+        grid-template-columns: repeat(5, 1fr);
     }
 }
 @media (max-width: 768px) {
     body { padding: 10px; }
     .malla-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 columnas en móviles */
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 @media (max-width: 480px) {
     .malla-grid {
-        grid-template-columns: 1fr; /* 1 columna en pantallas muy pequeñas */
+        grid-template-columns: 1fr;
     }
 }
