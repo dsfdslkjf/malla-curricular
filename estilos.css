@@ -1,1 +1,196 @@
+/* Usamos variables CSS para manejar fácilmente la paleta de colores rosa pastel */
+:root {
+    --color-fondo: #FFF0F5; /* Rosa muy pálido para el fondo */
+    --color-texto: #5c3b4d; /* Un tono oscuro para buena legibilidad */
+    --color-borde: #ffc2d1;
+    
+    /* Colores para cada ámbito de ramo */
+    --color-general: #ffe5ec;
+    --color-disciplinario: #ffc2d1;
+    --color-practico: #ffb3c6;
+    --color-profesional: #fb6f92; /* Un rosa más llamativo como pediste */
 
+    /* Colores para los estados */
+    --color-aprobado: #e0e0e0; /* Un gris suave para ramos aprobados */
+    --color-aprobado-texto: #888;
+    --color-bloqueado: #f8f0f2; /* Un rosa muy desaturado */
+    --color-bloqueado-texto: #b4a6aa;
+}
+
+/* Estilos generales del cuerpo de la página */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+header {
+    margin-bottom: 30px;
+}
+
+h1 {
+    color: var(--color-profesional);
+    font-weight: 600;
+}
+
+.frase-motivadora {
+    font-style: italic;
+    font-weight: 300;
+}
+
+/* Contenedor principal de la malla usando CSS Grid para ser responsivo */
+.malla-grid {
+    display: grid;
+    /* Crea 10 columnas, pero se ajustarán automáticamente en pantallas pequeñas */
+    grid-template-columns: repeat(10, 1fr);
+    gap: 15px;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+/* Estilo para cada columna de semestre */
+.semestre {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.semestre-titulo {
+    font-weight: 600;
+    padding: 10px;
+    border-bottom: 2px solid var(--color-borde);
+    margin-bottom: 5px;
+}
+
+/* Estilo base para cada tarjeta de ramo */
+.ramo {
+    padding: 15px 10px;
+    border-radius: 8px;
+    border: 1px solid var(--color-borde);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
+    font-size: 14px;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Efecto al pasar el mouse sobre un ramo */
+.ramo:not(.bloqueado):not(.aprobado):hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Clases de colores según el ámbito del ramo */
+.ambito-general { background-color: var(--color-general); }
+.ambito-disciplinario { background-color: var(--color-disciplinario); }
+.ambito-practico { background-color: var(--color-practico); }
+.ambito-profesional { background-color: var(--color-profesional); color: white; }
+
+/* Estilo para los ramos aprobados */
+.ramo.aprobado {
+    background-color: var(--color-aprobado);
+    color: var(--color-aprobado-texto);
+    text-decoration: line-through;
+    border-color: #ccc;
+    cursor: default;
+}
+
+/* Estilo para los ramos bloqueados */
+.ramo.bloqueado {
+    background-color: var(--color-bloqueado);
+    color: var(--color-bloqueado-texto);
+    border-color: #e8dfe2;
+    cursor: not-allowed;
+    border-style: dashed;
+}
+
+/* Leyenda */
+#leyenda {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.leyenda-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.color-box {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: 1px solid var(--color-borde);
+}
+
+/* Estilos para el Modal de Requisitos */
+.modal-oculto {
+    display: none;
+}
+.modal-visible {
+    display: flex;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+}
+.modal-contenido {
+    background-color: #fff;
+    margin: auto;
+    padding: 20px 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+.cerrar-modal {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+#lista-requisitos {
+    list-style: none;
+    padding-left: 0;
+}
+#lista-requisitos li {
+    background-color: var(--color-bloqueado);
+    margin: 5px 0;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+/* Media Query para hacer la malla responsiva en celulares */
+@media (max-width: 1200px) {
+    .malla-grid {
+        grid-template-columns: repeat(5, 1fr); /* 5 columnas en tablets */
+    }
+}
+@media (max-width: 768px) {
+    body { padding: 10px; }
+    .malla-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columnas en móviles */
+    }
+}
+@media (max-width: 480px) {
+    .malla-grid {
+        grid-template-columns: 1fr; /* 1 columna en pantallas muy pequeñas */
+    }
+}
